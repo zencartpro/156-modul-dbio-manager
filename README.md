@@ -10,6 +10,11 @@ Dieses Modul ist komplett auf englisch, ebenso die beiligende ausführliche Doku
 Wer sich an der deutschen Übersetzung beteiligen will, ist eingeladen, das auf Github zu tun:
 https://github.com/zencartpro/156-modul-dbio-manager
 
+Bei der Installation werden keinerlei bestehende Dateien geändert oder überschrieben.
+Einfach im Ordner NEUE DATEIEN den Ordner DEINADMIN auf den Namen des Adminverzeichnisses umbenennen und in der vorgegebenen Struktur ins Shopverzeichnis hochladen.
+Den Ordnern dbio und dbio/logs Schreibrechte geben (chmod 777)
+Danach ist in der Administration unter Tools der neue Menüpunkt Database I/O Manager vorhanden
+
 getestet mit:
 
 Zen Cart Version:
