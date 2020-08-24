@@ -1,41 +1,41 @@
 <?php
 // -----
-// Part of the DataBase I/O Manager (aka DbIo) plugin, created by Cindy Merkin (cindy@vinosdefrutastropicales.com)
+// Teil des DataBase I/O Manager (aka DbIo) Plugins, erstellt von Cindy Merkin (cindy@vinosdefrutastropicales.com)
 // Copyright (c) 2015-2017, Vinos de Frutas Tropicales.
 //
 
 // ----
-// These definitions are used by this sequencing class as well as the report-specific handlers.
+// Diese Definitionen werden sowohl von dieser Sequenzierungsklasse als auch von den berichtsspezifischen Handlern verwendet.
 //
-define ('DBIO_INVALID_CHAR_REPLACEMENT', 167); //-Use the "section symbol" (??) as the invalid-character replacement
+define ('DBIO_INVALID_CHAR_REPLACEMENT', 167); //-Verwenden Sie das "Abschnittssymbol" (??) als Ersatz für ungültige Zeichen
 
 // -----
-// Messages used by the DbIo class.
+// Nachrichten, die von der DbIo-Klasse verwendet werden.
 //
-define ('DBIO_FORMAT_TEXT_NO_DESCRIPTION', 'This DbIo handler has not provided its description.');
-define ('DBIO_MESSAGE_NO_HANDLERS_FOUND', 'No DbIo handlers were found; no report-generation is possible.');
-define ('DBIO_FORMAT_MESSAGE_NO_HANDLER', 'Missing DbIo handler class file %s.');
-define ('DBIO_FORMAT_MESSAGE_NO_CLASS', 'Missing DbIo handler class named "%1$s" in handler file %2$s.');
-define ('DBIO_MESSAGE_EXPORT_NOT_INITIALIZED', 'Export aborted: No handler previously specified.');
-define ('DBIO_MESSAGE_IMPORT_NOT_INITIALIZED', 'Import aborted: No handler previously specified.');
-define ('DBIO_FORMAT_MESSAGE_EXPORT_NO_FP', 'Export aborted. Failure creating output file %s.');
-define ('DBIO_EXPORT_NOTHING_TO_DO', 'DbIo Export: No records matched the requested criteria.');
-define ('DBIO_FORMAT_MESSAGE_IMPORT_FILE_MISSING', 'Import aborted:  Missing input file (%s).');
-define ('DBIO_WARNING_ENCODING_ERROR', 'DbIo Import: Could not encode the input for ' . CHARSET . '.');
-define ('DBIO_ERROR_NO_HANDLER', 'DbIo Export. No DbIo handlers are configured.');
-define ('DBIO_ERROR_EXPORT_NO_LANGUAGE', 'DbIo Export.  The language code "%s" is not configured for the store.');
-define ('DBIO_ERROR_NO_PHP_MBSTRING', "The DbIo requires the &quot;php-mbstring&quot; extension to be loaded; contact your webhost and ask them to install that extension.");
-define ('DBIO_ERROR_MISSING_DIRECTORY', "The directory (%s) was not found; no DbIo operations are possible until this is corrected.");
-define ('DBIO_ERROR_DIRECTORY_NOT_WRITABLE', "The directory (%s) is not writable; no DbIo operations are possible until this is corrected.");
+define ('DBIO_FORMAT_TEXT_NO_DESCRIPTION', 'Dieser DbIo-Handler hat seine Beschreibung nicht zur Verfügung gestellt.');
+define ('DBIO_MESSAGE_NO_HANDLERS_FOUND', 'cEs wurden keine DbIo-Handler gefunden; eine Reportgenerierung ist nicht möglich.');
+define ('DBIO_FORMAT_MESSAGE_NO_HANDLER', 'Fehlende DbIo-Handler-Klassendatei %s.');
+define ('DBIO_FORMAT_MESSAGE_NO_CLASS', 'Fehlende DbIo-Handler-Klasse mit dem Namen "%1$s" in der Handler-Datei %2$s.');
+define ('DBIO_MESSAGE_EXPORT_NOT_INITIALIZED', 'Export abgebrochen: Kein Handler zuvor angegeben.');
+define ('DBIO_MESSAGE_IMPORT_NOT_INITIALIZED', 'Import abgebrochen: Kein Handler zuvor angegeben.');
+define ('DBIO_FORMAT_MESSAGE_EXPORT_NO_FP', 'Export abgebrochen. Fehlgeschlagene Erstellung der Ausgabedatei %s.');
+define ('DBIO_EXPORT_NOTHING_TO_DO', 'DbIo Export: Keine Datensätze entsprachen den angeforderten Kriterien.');
+define ('DBIO_FORMAT_MESSAGE_IMPORT_FILE_MISSING', 'Import abgebrochen:  Fehlende Eingabedatei (%s).');
+define ('DBIO_WARNING_ENCODING_ERROR', 'DbIo-Import: Konnte die Eingaben für ' . CHARSET . ' nicht kodieren.');
+define ('DBIO_ERROR_NO_HANDLER', 'DbIo-Ausfuhr. Es sind keine DbIo-Handler konfiguriert.');
+define ('DBIO_ERROR_EXPORT_NO_LANGUAGE', 'DbIo-Ausfuhr.  Der Sprachcode "%s" ist für den Shop nicht konfiguriert.');
+define ('DBIO_ERROR_NO_PHP_MBSTRING', 'Für die DbIo muss die Erweiterung &quot;php-mbstring&quot; geladen werden; wenden Sie sich an Ihren Internetanbieter und bitten Sie ihn, diese Erweiterung zu installieren.');
+define ('DBIO_ERROR_MISSING_DIRECTORY', 'Das Verzeichnis (%s) wurde nicht gefunden; keine DbIo-Operationen sind möglich, bis dies korrigiert ist.');
+define ('DBIO_ERROR_DIRECTORY_NOT_WRITABLE', "Das Verzeichnis (%s) ist nicht beschreibbar; es sind keine DbIo-Operationen möglich, bis dies korrigiert ist.");
 
 // -----
-// Messages used by the DbIoHandler class
+// Von der Klasse DbIoHandler verwendete Nachrichten
 //
-define ('DBIO_MESSAGE_IMPORT_MISSING_HEADER', 'Import aborted: Missing header information for input file.');
-define ('DBIO_FORMAT_MESSAGE_IMPORT_MISSING_KEY', 'Import aborted: Missing key column (%s).');
-define ('DBIO_TEXT_ERROR', 'Error: ');  //-Used to prefix processing messages with errors
-define ('DBIO_MESSAGE_KEY_CONFIGURATION_ERROR', 'There is an error in the key-configuration for the selected handler; the handler cannot be used.');
-define ('DBIO_ERROR_HANDLER_MISSING_FUNCTION', 'The current handler (%1$s) is missing the (required) "%2$s" function; the import is disallowed.');
-define ('DBIO_ERROR_HEADER_MISSING_KEYS', 'The current import-file is missing these (%s) required columns; the import is disallowed.');
-define ('DBIO_ERROR_HANDLER_NO_COMMANDS', 'The current import-file uses DbIo commands, but the handler doesn\'t support them; the import is disallowed.');
-define ('DBIO_ERROR_HANDLER_VERSION_MISMATCH', 'There is a version-mismatch for the selected handler (%1$s); the handler cannot be used.');
+define ('DBIO_MESSAGE_IMPORT_MISSING_HEADER', 'Import abgebrochen: Fehlende Header-Informationen für die Eingabedatei.');
+define ('DBIO_FORMAT_MESSAGE_IMPORT_MISSING_KEY', 'Import abgebrochen: Fehlende Schlüsselspalte (%s).');
+define ('DBIO_TEXT_ERROR', 'Fehler: ');  //-Wird verwendet, um Verarbeitungsmeldungen mit Fehlern voranzustellen
+define ('DBIO_MESSAGE_KEY_CONFIGURATION_ERROR', 'Es liegt ein Fehler in der Schlüsselkonfiguration für den ausgewählten Handler vor; der Handler kann nicht verwendet werden.');
+define ('DBIO_ERROR_HANDLER_MISSING_FUNCTION', 'Dem aktuellen Handler (%1$s) fehlt die (erforderliche) "%2$s"-Funktion; der Import ist nicht erlaubt.');
+define ('DBIO_ERROR_HEADER_MISSING_KEYS', 'In der aktuellen Importdatei fehlen diese (%s) erforderlichen Spalten; der Import ist nicht erlaubt.');
+define ('DBIO_ERROR_HANDLER_NO_COMMANDS', 'Die aktuelle Import-Datei verwendet DbIo-Befehle, aber der Handler unterstützt sie nicht; der Import ist nicht erlaubt.');
+define ('DBIO_ERROR_HANDLER_VERSION_MISMATCH', 'Es gibt eine Versionsabweichung für den ausgewählten Handler (%1$s); der Handler kann nicht verwendet werden.');

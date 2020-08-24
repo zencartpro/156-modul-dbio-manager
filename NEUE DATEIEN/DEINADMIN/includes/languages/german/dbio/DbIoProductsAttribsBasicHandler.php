@@ -1,10 +1,10 @@
 <?php
 // -----
-// Part of the DataBase I/O Manager (aka DbIo) plugin, created by Cindy Merkin (cindy@vinosdefrutastropicales.com)
+// Teil des DataBase I/O Manager (aka DbIo) Plugins, erstellt von Cindy Merkin (cindy@vinosdefrutastropicales.com)
 // Copyright (c) 2015-2020, Vinos de Frutas Tropicales.
 //
 
 // -----
-// Defines the handler's descriptive text.
+// Definiert den beschreibenden Text des Handlers
 //
-define('DBIO_PRODUCTSATTRIBSBASIC_DESCRIPTION', 'This report-format supports import/export of the <em>basic</em> products\' attributes\' values. The report, indexed by the associated product\'s <b>model-number</b>, includes one record per product/product-option pair with the option-specific values separated by ^ characters &mdash; using your store\'s <code>DEFAULT_LANGUAGE</code>.<br /><br /><b>Notes:</b><ol><li>Your store\'s products <em>must</em> each have a unique model number for any &quot;import&quot; action to successfully complete.</li><li>All options\' names and option values\' names <b>must already exist within your database</b> for an associated attributes\' record to be successfully imported.</li></ol>');
+define('DBIO_PRODUCTSATTRIBSBASIC_DESCRIPTION', 'Dieses Berichtformat unterstützt den Import/Export der <em>grundlegenden</em> Produkt-Attributwerte. Der Bericht, indiziert durch die <b>Artikelnummer</b> des zugehörigen Produkts, enthält einen Datensatz pro Produkt/Produkt-Option-Paar mit den optionsspezifischen Werten, getrennt durch ^-Zeichen unter Verwendung der Standardsprache Ihres Shops.<br /><br /><b>Anmerkungen:</b><ol><li>Die Produkte Ihres Shops <em>müssen</em> alle eine eindeutige Artikelnummer für jede &quot;Import&quot;-Aktion haben, die erfolgreich abgeschlossen werden soll.</li><li>Alle Optionsnamen und Optionswertnamen <b>müssen bereits in Ihrer Datenbank existieren</b>, damit ein zugehöriger Attributdatensatz erfolgreich importiert werden kann.</li></ol>');

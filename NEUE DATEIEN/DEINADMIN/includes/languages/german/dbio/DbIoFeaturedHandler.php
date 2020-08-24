@@ -1,10 +1,10 @@
 <?php
 // -----
-// Part of the DataBase Import/Export (aka DbIo) plugin, created by Cindy Merkin (cindy@vinosdefrutastropicales.com)
+// Teil des DataBase I/O Manager (aka DbIo) Plugins, erstellt von Cindy Merkin (cindy@vinosdefrutastropicales.com)
 // Copyright (c) 2015-2016, Vinos de Frutas Tropicales.
 //
 
 // -----
-// Defines the handler's descriptive text.
+// Definiert den beschreibenden Text des Handlers.
 //
-define ('DBIO_FEATURED_DESCRIPTION', 'This report-format supports import/export of all fields within the &quot;featured&quot; table, the <em>Featured Products</em> information.');
+define ('DBIO_FEATURED_DESCRIPTION', 'Dieses Bericht-Format unterstützt den Import/Export aller Felder innerhalb der &quot;vorgestellten&quot; Tabelle, der <em>Empfohlene Produkte</em> Information.');

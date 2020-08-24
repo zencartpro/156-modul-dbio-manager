@@ -1,10 +1,10 @@
 <?php
 // -----
-// Part of the DataBase I/O Manager (aka DbIo) plugin, created by Cindy Merkin (cindy@vinosdefrutastropicales.com)
+// Teil des DataBase I/O Manager (aka DbIo) Plugins, erstellt von Cindy Merkin (cindy@vinosdefrutastropicales.com)
 // Copyright (c) 2016-2018, Vinos de Frutas Tropicales.
 //
 
 // -----
-// Defines the handler's descriptive text.
+// Definiert den beschreibenden Text des Handlers.
 //
-define ('DBIO_CUSTOMERS_DESCRIPTION', 'This report-format supports the <em>export-only</em> of all fields within the <code>customers</code> table as well as the customer\'s <em>default address</em> fields from the <code>address_book</code> table.');
+define ('DBIO_CUSTOMERS_DESCRIPTION', 'Dieses Report-Format unterstützt den <em>reinen Export</em> aller Felder innerhalb der Tabelle <code>customers</code> sowie der Felder <em>Standardadresse</em> des Kunden aus der Tabelle <code>address_book<</code>.');

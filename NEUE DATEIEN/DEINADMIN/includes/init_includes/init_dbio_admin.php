@@ -2,7 +2,7 @@
 // -----
 // Part of the DataBase I/O Manager (aka DbIo) plugin, created by Cindy Merkin (cindy@vinosdefrutastropicales.com)
 // Copyright (c) 2016-2020, Vinos de Frutas Tropicales.
-//
+// InnoDB statt MyISAM für neue Tabellen - 2020-08-24 webchills
 if (!defined('IS_ADMIN_FLAG')) {
     die('Illegal Access');
 }
@@ -15,7 +15,7 @@ if (empty($_SESSION['admin_id'])) {
 }
 
 define('DBIO_CURRENT_VERSION', '1.6.3');
-define('DBIO_CURRENT_UPDATE_DATE', '2020-06-28');
+define('DBIO_CURRENT_UPDATE_DATE', '2020-08-24');
 
 $version_release_date = DBIO_CURRENT_VERSION . ' (' . DBIO_CURRENT_UPDATE_DATE . ')';
 
@@ -90,7 +90,7 @@ if (DBIO_CURRENT_VERSION != $dbio_current_version) {
                     PRIMARY KEY (dbio_reports_id),
                     KEY idx_dbio_handler_name (handler_name),
                     KEY idx_dbio_admin_id (admin_id)
-                 ) ENGINE=MyISAM"
+                 ) ENGINE=InnoDB"
             );
             $db->Execute(
                 "CREATE TABLE " . TABLE_DBIO_REPORTS_DESCRIPTION . " (
@@ -98,7 +98,7 @@ if (DBIO_CURRENT_VERSION != $dbio_current_version) {
                     language_id int(11) NOT NULL default 1,
                     report_description text,
                     PRIMARY KEY (dbio_reports_id,language_id)
-                 ) ENGINE=MyISAM"
+                 ) ENGINE=InnoDB"
             );
         }
         
