@@ -1,7 +1,7 @@
 <?php
 // -----
 // Teil des DataBase I/O Manager (aka DbIo) Plugins, erstellt von Cindy Merkin (cindy@vinosdefrutastropicales.com)
-// Copyright (c) 2015-2020, Vinos de Frutas Tropicales.
+// Copyright (c) 2017-2020, Vinos de Frutas Tropicales.
 //
 define('HEADING_TITLE', 'DbIo%s-Vorlagen konfigurieren');
 

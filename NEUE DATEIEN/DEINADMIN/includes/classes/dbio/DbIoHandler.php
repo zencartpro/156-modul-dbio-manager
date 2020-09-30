@@ -13,7 +13,7 @@ abstract class DbIoHandler extends base
 //                                    C O N S T A N T S 
 // ----------------------------------------------------------------------------------
     // ----- Interface Constants -----
-    const DBIO_HANDLER_VERSION   = '1.6.0';
+    const DBIO_HANDLER_VERSION   = '1.6.4';
     // ----- Field-Import Status Values -----
     const DBIO_IMPORT_OK         = '--ok--';
     const DBIO_NO_IMPORT         = '--none--';
@@ -259,7 +259,7 @@ abstract class DbIoHandler extends base
             $parsed_date = '';
         } else {
             $date_value = $date_value_in;
-            if (DBIO_IMPORT_DATE_FORMAT != 'm-d-y') {
+            if (DBIO_IMPORT_DATE_FORMAT != 'y-m-d') {
                 $date_time_split = explode(' ', $date_value);
                 $needle = (dbio_strpos($date_time_split[0], '/') !== false) ? '/' : '-';
                 $date_split = explode($needle, $date_time_split[0]);
@@ -267,7 +267,7 @@ abstract class DbIoHandler extends base
                     if (DBIO_IMPORT_DATE_FORMAT == 'd-m-y') {
                         $date_value = sprintf('%u-%02u-%02u', $date_split[2], $date_split[1], $date_split[0]);
                     } else {
-                        $date_value = sprintf('%u-%02u-%02u', $date_split[0], $date_split[1], $date_split[2]);
+                        $date_value = sprintf('%u-%02u-%02u', $date_split[2], $date_split[0], $date_split[1]);
                     }
                     if ($field_type == 'datetime' && isset($date_time_split[1])) {
                         $date_value .= ' ' . $date_time_split[1];
@@ -616,6 +616,7 @@ abstract class DbIoHandler extends base
                     $current_field = self::DBIO_NO_IMPORT;
                     if (isset($this->dbio_command_index)) {
                         $this->debugMessage("importGetHeader, multiple v_dbio_command columns found; import cancelled.", self::DBIO_ERROR);
+                        $this->message = DBIO_ERROR_MULTIPLE_COMMAND_COLUMNS;
                         $initialization_complete = false;
                     } else {
                         $this->dbio_command_index = $key_index;
@@ -1642,27 +1643,44 @@ abstract class DbIoHandler extends base
     // Function to insert an associative-array element into the specified array at the location
     // identified in the current non-language customized field-list.
     //
-    // Note: The $fields array is an associative key/value pair, keyed on the field's name.  The
-    // class' customized_fields array is numerically indexed, based on the to-be-exported report's
-    // previously-determined header-order.
+    // Notes: 
+    // 1) The $fields array is an associative key/value pair, keyed on the field's name.  The
+    //    class' customized_fields array is numerically indexed, based on the to-be-exported report's
+    //    previously-determined header-order.
+    // 2) The calling handler has ensured that the $fields array contains all to-be-exported fields
+    //    prior to (i.e. to the left of) the to-be-added field, if customized fields are in effect.
     //
     protected function insertAtCustomizedPosition($fields, $field_name, $field_value)
     {
-        if (isset($this->customized_fields) && is_array($this->customized_fields)) {
-            $field_position = array_search($field_name, $this->customized_fields);
+        // -----
+        // If this isn't a customized-template export, simply record the field's value for its name.
+        //
+        if (!(isset($this->customized_fields) && is_array($this->customized_fields))) {
+            $fields[$field_name] = $field_value;
+        // -----
+        // Otherwise, processing a customized export ...
+        //
+        } else {
+            // -----
+            // Determine the location within the data for this customized field, continuing only if
+            // the field is actually specified in the CSV's header.
+            //
+            $field_position = array_search('v_' . $field_name, $this->headers);
             if ($field_position !== false) {
-                $updated_fields = array();
-                $customized_field_count = count($this->customized_fields);
-                
                 // -----
-                // First, copy the elements from the input fields' array up to the point of the customized
-                // fields' insertion.
+                // If the current field is the first 'column' data, then it's the first element of the
+                // to-be-output CSV record, nothing to copy before it.
                 //
-                for ($next_field = 0; $next_field < $customized_field_count && $this->customized_fields[$next_field] != $field_name; $next_field++) {
-                    $next_field_name = $this->customized_fields[$next_field];
-                    $updated_fields[$next_field_name] = $fields[$next_field_name];
+                $field_keys = array_keys($fields);
+                $field_count = count($fields);
+                $updated_fields = array();
+                $next_field = 0;
+                if ($field_position !== 0) {
+                     for ($next_field = 0; $next_field < $field_position; $next_field++) {
+                        $next_field_name = $field_keys[$next_field];
+                        $updated_fields[$next_field_name] = $fields[$next_field_name];
+                    }
                 }
-                
                 
                 // -----
                 // Next, insert the requested key/value pair into the updated fields' array.
@@ -1673,16 +1691,13 @@ abstract class DbIoHandler extends base
                 // Finally, copy the remaining elements of the input fields' array after that insertion
                 // and set the reconstructed array as the method's return value.
                 //
-                for ($next_field++; $next_field < $customized_field_count; $next_field++) {
-                    $next_field_name = $this->customized_fields[$next_field];
+                for (; $next_field < $field_count; $next_field++) {
+                    $next_field_name = $field_keys[$next_field];
                     $updated_fields[$next_field_name] = $fields[$next_field_name];
                 }
                 $fields = $updated_fields;
             }
-        } else {
-            $fields[$field_name] = $field_value;
         }
         return $fields;
     }
-
 }

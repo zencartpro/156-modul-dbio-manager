@@ -1,7 +1,7 @@
 <?php
 // -----
 // Part of the DataBase I/O Manager (aka DbIo) plugin, created by Cindy Merkin (cindy@vinosdefrutastropicales.com)
-// Copyright (c) 2015-2017, Vinos de Frutas Tropicales.
+// Copyright (c) 2015-2020, Vinos de Frutas Tropicales.
 //
 
 // ----
@@ -39,3 +39,4 @@ define ('DBIO_ERROR_HANDLER_MISSING_FUNCTION', 'The current handler (%1$s) is mi
 define ('DBIO_ERROR_HEADER_MISSING_KEYS', 'The current import-file is missing these (%s) required columns; the import is disallowed.');
 define ('DBIO_ERROR_HANDLER_NO_COMMANDS', 'The current import-file uses DbIo commands, but the handler doesn\'t support them; the import is disallowed.');
 define ('DBIO_ERROR_HANDLER_VERSION_MISMATCH', 'There is a version-mismatch for the selected handler (%1$s); the handler cannot be used.');
+define('DBIO_ERROR_MULTIPLE_COMMAND_COLUMNS', 'Import cancelled: Multiple v_dbio_command columns found in input.');

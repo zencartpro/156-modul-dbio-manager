@@ -3,6 +3,7 @@
 // Part of the DataBase I/O Manager (aka DbIo) plugin, created by Cindy Merkin (cindy@vinosdefrutastropicales.com)
 // Copyright (c) 2016-2020, Vinos de Frutas Tropicales.
 // InnoDB statt MyISAM f¸r neue Tabellen - 2020-08-24 webchills
+// Multilanguage Install - 2020-09-30 webchills
 if (!defined('IS_ADMIN_FLAG')) {
     die('Illegal Access');
 }
@@ -14,8 +15,8 @@ if (empty($_SESSION['admin_id'])) {
     return;
 }
 
-define('DBIO_CURRENT_VERSION', '1.6.3');
-define('DBIO_CURRENT_UPDATE_DATE', '2020-08-24');
+define('DBIO_CURRENT_VERSION', '1.6.4');
+define('DBIO_CURRENT_UPDATE_DATE', '2020-09-30');
 
 $version_release_date = DBIO_CURRENT_VERSION . ' (' . DBIO_CURRENT_UPDATE_DATE . ')';
 
@@ -60,6 +61,36 @@ if (defined('DBIO_MODULE_VERSION')) {
     $db->Execute("INSERT INTO " . TABLE_CONFIGURATION . " ( configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added, use_function, set_function ) VALUES ( 'Enable Debug?', 'DBIO_DEBUG', 'false', 'Identify whether (true) or not (false, the default) the DbIo debug is to be enabled.  When enabled, <b>all</b> I/O status is written to a <em>dbio-*.log</em> file in your store\'s /YOUR_ADMIN/dbio/logs folder.', $cgi, 600, now(), NULL, 'zen_cfg_select_option(array(\'true\', \'false\'),')");
 
     $db->Execute("INSERT INTO " . TABLE_CONFIGURATION . " ( configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added, use_function, set_function ) VALUES ( 'Debug Date Format', 'DBIO_DEBUG_DATE_FORMAT', 'Y-m-d H:i:s', 'Enter the formatting string used to timestamp all DbIo log entries.', $cgi, 601, now(), NULL, NULL)");
+    
+    $db->Execute (
+        "REPLACE INTO " . TABLE_CONFIGURATION_LANGUAGE . " 
+            (configuration_title, configuration_key, configuration_language_id, configuration_description, last_modified, date_added) 
+         VALUES 
+            ('DBIO Version', 'DBIO_MODULE_VERSION', '43', 'Die derzeit installierte DBIO Version', now(), now())"
+    );
+    
+    $db->Execute (
+        "REPLACE INTO " . TABLE_CONFIGURATION_LANGUAGE . " 
+            (configuration_title, configuration_key, configuration_language_id, configuration_description, last_modified, date_added) 
+         VALUES 
+            ('CSV : Trennzeichen', 'DBIO_CSV_DELIMITER', '43', 'Geben Sie das Zeichen ein, das zum Trennen von Spalten innerhalb einer DbIo-CSV-Datei verwendet wird.  Um das Tabulator-Zeichen als Trennzeichen zu verwenden, geben Sie das Wort <b>TAB</b> ein.  (Voreinstellung: <b>,</b>)', now(), now())"
+    );
+    
+    $db->Execute (
+        "REPLACE INTO " . TABLE_CONFIGURATION_LANGUAGE . " 
+            (configuration_title, configuration_key, configuration_language_id, configuration_description, last_modified, date_added) 
+         VALUES 
+            ('CSV : Enclosure Zeichen', 'DBIO_CSV_ENCLOSURE', '43', 'Geben Sie das Zeichen ein, das verwendet wird, um Felder innerhalb einer DbIo CSV-Datei zu <em>umschlieﬂen</em>.  (Voreinstellung: <b>\"</b>)', now(), now())"
+    );
+    
+    $db->Execute (
+        "REPLACE INTO " . TABLE_CONFIGURATION_LANGUAGE . " 
+            (configuration_title, configuration_key, configuration_language_id, configuration_description, last_modified, date_added) 
+         VALUES 
+            ('CSV : Escape Zeichen', 'DBIO_CSV_ESCAPE', '43', '', now(), now())"
+    );
+    
+    
 }
 
 // -----
@@ -151,7 +182,19 @@ if (DBIO_CURRENT_VERSION != $dbio_current_version) {
                 "INSERT IGNORE INTO " . TABLE_CONFIGURATION . " 
                     ( configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added, use_function, set_function ) 
                 VALUES 
-                    ( '<em>Products</em>: Auto-Create Categories on Import?', 'DBIO_PRODUCTS_AUTO_CREATE_CATEGORIES', 'No', 'How should the <em>DbIo</em> handle missing categories on a <em>Products</em> import?  Choose <b>Yes</b> to have any missing categories automatially generated; choose <b>No</b> (the default) to disallow any product imports when the categories don\'t previously exist.', $cgi, 150, now(), NULL, 'zen_cfg_select_option(array(\'Yes\', \'No\'),')");
+                    ( '<em>Products</em>: Auto-Create Categories on Import?', 'DBIO_PRODUCTS_AUTO_CREATE_CATEGORIES', 'No', 'How should the <em>DbIo</em> handle missing categories on a <em>Products</em> import?  Choose <b>Yes</b> to have any missing categories automatially generated; choose <b>No</b> (the default) to disallow any product imports when the categories don\'t previously exist.', $cgi, 150, now(), NULL, 'zen_cfg_select_option(array(\'Yes\', \'No\'),')"
+            );
+        }
+    }
+    
+    if (version_compare($dbio_current_version, '1.6.4', '<')) {
+        if (!defined('DBIO_PRODUCTS_INSERT_REQUIRES_COMMAND')) {
+            $db->Execute(
+                "INSERT IGNORE INTO " . TABLE_CONFIGURATION . " 
+                    ( configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added, use_function, set_function ) 
+                VALUES 
+                    ( '<em>Products</em>: Product Creation Requires Command?', 'DBIO_PRODUCTS_INSERT_REQUIRES_COMMAND', 'No', 'Does a <em>Products</em> import require a DbIo <code>ADD</code> command? Choose <b>No</b> (the default) to allow products to be created if no matching products_id and/or products_model is found.<br><br>Choose <b>Yes</b> to disallow any product-import that results in a new product unless the <code>ADD</code> command is present.', $cgi, 110, now(), NULL, 'zen_cfg_select_option(array(\'Yes\', \'No\'),')"
+            );
         }
     }
 

@@ -1,7 +1,7 @@
 <?php
 // -----
 // Teil des DataBase I/O Manager (aka DbIo) Plugins, erstellt von Cindy Merkin (cindy@vinosdefrutastropicales.com)
-// Copyright (c) 2015-2017, Vinos de Frutas Tropicales.
+// Copyright (c) 2015-2020, Vinos de Frutas Tropicales.
 //
 
 // ----
@@ -39,3 +39,4 @@ define ('DBIO_ERROR_HANDLER_MISSING_FUNCTION', 'Dem aktuellen Handler (%1$s) feh
 define ('DBIO_ERROR_HEADER_MISSING_KEYS', 'In der aktuellen Importdatei fehlen diese (%s) erforderlichen Spalten; der Import ist nicht erlaubt.');
 define ('DBIO_ERROR_HANDLER_NO_COMMANDS', 'Die aktuelle Import-Datei verwendet DbIo-Befehle, aber der Handler unterstützt sie nicht; der Import ist nicht erlaubt.');
 define ('DBIO_ERROR_HANDLER_VERSION_MISMATCH', 'Es gibt eine Versionsabweichung für den ausgewählten Handler (%1$s); der Handler kann nicht verwendet werden.');
+define('DBIO_ERROR_MULTIPLE_COMMAND_COLUMNS', 'Import abgebrochen: Verschiedene v_dbio_command Spalten in der Input Datei gefunden.');

@@ -269,7 +269,7 @@ if (!$ok_to_proceed) {
                                 $chunk_extension = '.' . $split_file_info['extension'];
                                 unset($split_file_info);
 
-                                while (($data = fgets($fp)) !== false) {
+                                while (($data = fgetcsv($fp)) !== false) {
                                     if ($split_count == 0 && $header_included) {
                                         $header_record = $data;
                                     }
@@ -289,7 +289,7 @@ if (!$ok_to_proceed) {
                                         $record_count = 0;
                                         if ($header_included) {
                                             $record_count++;
-                                            if (fputs($fp_out, $header_record) === false) {
+                                            if (fputcsv($fp_out, $header_record) === false) {
                                                 $split_error = true;
                                                 $messageStack->add_session(sprintf(ERROR_WRITING_SPLIT_FILE, $out_filename, $record_count));
                                                 break;
@@ -301,7 +301,7 @@ if (!$ok_to_proceed) {
                                     }
                                     if (!($record_count == 0 && $header_included)) {
                                         $record_count++;
-                                        if (fputs($fp_out, $data) === false) {
+                                        if (fputcsv($fp_out, $data) === false) {
                                             $split_error = true;
                                             $messageStack->add_session(sprintf(ERROR_WRITING_SPLIT_FILE, $out_filename, $record_count));
                                             break;
@@ -794,6 +794,7 @@ if (!$ok_to_proceed || $error_message !== '') {
             TEXT_FILE_DEFAULT_SORT_ORDER => DBIO_FILE_SORT_DEFAULT,
             TEXT_ALLOW_DUPLICATE_MODELS => DBIO_PRODUCTS_ALLOW_DUPLICATE_MODELS,
             TEXT_AUTO_CREATE_CATEGORIES => DBIO_PRODUCTS_AUTO_CREATE_CATEGORIES,
+            TEXT_INSERT_REQUIRES_COMMAND => DBIO_PRODUCTS_INSERT_REQUIRES_COMMAND,
             TEXT_DEBUG_ENABLED => DBIO_DEBUG,
             TEXT_DATE_FORMAT => DBIO_DEBUG_DATE_FORMAT,
         ),

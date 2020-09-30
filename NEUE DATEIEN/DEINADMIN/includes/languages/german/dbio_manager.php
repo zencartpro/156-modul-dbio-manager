@@ -1,7 +1,7 @@
 <?php
 // -----
 // Teil des DataBase I/O Manager (aka DbIo) Plugins, erstellt von Cindy Merkin (cindy@vinosdefrutastropicales.com)
-// Copyright (c) 2015-2020, Vinos de Frutas Tropicales.
+// Copyright (c) 2016-2020, Vinos de Frutas Tropicales.
 //
 define('HEADING_TITLE', 'Database I/O (DbIo) Manager');
 
@@ -22,6 +22,7 @@ define('TEXT_CSV_DATE_FORMAT', 'CSV: Import-Datumsformat');
 define('TEXT_FILE_DEFAULT_SORT_ORDER', 'Standard-Dateisortierfolge');
 define('TEXT_ALLOW_DUPLICATE_MODELS', 'Produkte: Doppelte Modelle zulassen');
 define('TEXT_AUTO_CREATE_CATEGORIES', 'Produkte: Kategorien automatisch erstellen');
+define('TEXT_INSERT_REQUIRES_COMMAND', 'Produkte: Artikel anlegen erfordert Befehl');
 define('TEXT_MAX_EXECUTION', 'Maximale Ausführungszeit');
 define('TEXT_SPLIT_RECORD_COUNT', 'Anzahl geteilter Datensätze');
 define('TEXT_DEBUG_ENABLED', 'Fehlersuche aktiviert');
