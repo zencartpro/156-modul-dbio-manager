@@ -83,9 +83,9 @@ ul.simple, ul.simple li { list-style-type: none; padding: 0 0 0 0.5em; margin: 0
 </head>
 
 <body>
-  <h1 id="title">Datenbank-I/O-Manager (DbIo) für Zen Cart&reg;</h1>
+  <h1 id="title">Datenbank-I/O-Manager (DbIo) für Zen Cart deutsch</h1>
   <p>Version 1.6.4 Copyright &copy; 2015-2020, <a href="https://vinosdefrutastropicales.com" target="_blank">Vinos de Frutas Tropicales</a>.</p>
-  <p>Aktueller Support Thread in den amerikanischen Zen Cart Foren: <a href="https://www.zen-cart.com/showthread.php?220569-Database-I-O-Manager-(DbIo)-Support-Thread" target="_blank">https://www.zen-cart.com/showthread.php?220569-Database-I-O-Manager-(DbIo)-Support-Thread</a></p>
+  <p>Support Thread: <a href="https://www.zen-cart-pro.at/forum/forums/158-DBIO-Manager" target="_blank">https://www.zen-cart-pro.at/forum/forums/158-DBIO-Manager</a></p>
   
   <div class="tab-container" id="outer-container">
     <ul class="etabs">
@@ -600,7 +600,21 @@ ul.simple, ul.simple li { list-style-type: none; padding: 0 0 0 0.5em; margin: 0
           <li>v1.6.4, 2020-10-04:<ul>
             <li>deutsche Übersetzung der Anleitung und der englischen Sprachdateien durch klartexter</li>
             <li>multilinguale Installation des Konfigurationsmenüs</li>
-            <li>Codeänderungen aus 1.6.4 beta übernommen</li>
+            <li>Update des Konfigurationsmenüs mt deutschen Texten für bereits installierte 1.6.3 Versionen</li>
+            <li>Add message for multiple v_dbio_command columns in import </li>
+            <li>Correct invalid dates' detection </li>
+            <li>Products import, now configurable to require an ADD command for insert</li>
+            <li>Enable a product to be unlinked from a category other than its master_categories_id</li>
+             <li>The following files were changed or added:
+               <ol>
+              <li>/YOUR_ADMIN/includes/classes/dbio/DbIoHandler.php</li>
+              <li>/YOUR_ADMIN/includes/classes/dbio/DbIoProductsHandler.php</li>
+              <li>/YOUR_ADMIN/includes/init_includes/init_dbio_admin.php</li>
+              <li>/YOUR_ADMIN/includes/languages/english/dbio/dbio_messages.php</li>
+              <li>/YOUR_ADMIN/includes/languages/english/dbio_manager.php</li>
+              <li>Neue Sprachdateien für deutsch /YOUR_ADMIN/includes/languages/german/...</li>
+               </ol>
+            </li>
           </ul></li>
        
           <li>v1.6.3, 2020-06-28:<ul>
