@@ -20,7 +20,7 @@ define('TEXT_CSV_ESCAPE', 'CSV: Escape');
 define('TEXT_CSV_ENCODING', 'CSV: Verschlüsselung');
 define('TEXT_CSV_DATE_FORMAT', 'CSV: Import-Datumsformat');
 define('TEXT_FILE_DEFAULT_SORT_ORDER', 'Standard-Dateisortierfolge');
-define('TEXT_ALLOW_DUPLICATE_MODELS', 'Produkte: Doppelte Modelle zulassen');
+define('TEXT_ALLOW_DUPLICATE_MODELS', 'Produkte: Doppelte Artikelnummern zulassen');
 define('TEXT_AUTO_CREATE_CATEGORIES', 'Produkte: Kategorien automatisch erstellen');
 define('TEXT_INSERT_REQUIRES_COMMAND', 'Produkte: Artikel anlegen erfordert Befehl');
 define('TEXT_MAX_EXECUTION', 'Maximale Ausführungszeit');
@@ -39,7 +39,7 @@ define('LEGEND_CONFIGURATION', 'Konfiguration');
 define('LEGEND_FILE_ACTIONS', 'Datei-Aktionen');
 define('LEGEND_FILE_UPLOADS', 'Datei-Uploads');
 
-define('TEXT_INSTRUCTIONS', 'Der <b><<i>DbIo Manager</i></b> bietet Ihnen <em>Handler</em>, die den Export und, bedingt, den Import von Datenbankinformationen unter Verwendung einer CSV-Datei (kommagetrennter Wert) ermöglichen.  Wählen Sie den zu verwendenden Handler aus der Dropdown-Liste unten aus, und die Funktionen dieses Handlers, z.B. Filter und/oder Optionen zur Anpassung von Vorlagen, werden angezeigt.');
+define('TEXT_INSTRUCTIONS', 'Der <b><i>DbIo Manager</i></b> bietet Ihnen <em>Handler</em>, die den Export und, bedingt, den Import von Datenbankinformationen unter Verwendung einer CSV-Datei (kommagetrennter Wert) ermöglichen.  Wählen Sie den zu verwendenden Handler aus der Dropdown-Liste unten aus, und die Funktionen dieses Handlers, z.B. Filter und/oder Optionen zur Anpassung von Vorlagen, werden angezeigt.');
 
 define('DBIO_BUTTON_DELETE', 'Löschen');
 define('DBIO_BUTTON_DELETE_TITLE', 'Klicken Sie hier, um die aktuell ausgewählte(n) Datei(en) vom Server zu löschen.');

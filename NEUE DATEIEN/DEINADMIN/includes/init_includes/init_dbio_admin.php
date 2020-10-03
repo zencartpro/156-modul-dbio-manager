@@ -2,8 +2,8 @@
 // -----
 // Part of the DataBase I/O Manager (aka DbIo) plugin, created by Cindy Merkin (cindy@vinosdefrutastropicales.com)
 // Copyright (c) 2016-2020, Vinos de Frutas Tropicales.
-// InnoDB statt MyISAM f�r neue Tabellen - 2020-08-24 webchills
-// Multilanguage Install - 2020-09-30 webchills
+// InnoDB statt MyISAM für neue Tabellen - 2020-08-24 webchills
+// Multilanguage Install - 2020-10-04 webchills
 if (!defined('IS_ADMIN_FLAG')) {
     die('Illegal Access');
 }
@@ -16,7 +16,7 @@ if (empty($_SESSION['admin_id'])) {
 }
 
 define('DBIO_CURRENT_VERSION', '1.6.4');
-define('DBIO_CURRENT_UPDATE_DATE', '2020-09-30');
+define('DBIO_CURRENT_UPDATE_DATE', '2020-10-04');
 
 $version_release_date = DBIO_CURRENT_VERSION . ' (' . DBIO_CURRENT_UPDATE_DATE . ')';
 
@@ -80,14 +80,63 @@ if (defined('DBIO_MODULE_VERSION')) {
         "REPLACE INTO " . TABLE_CONFIGURATION_LANGUAGE . " 
             (configuration_title, configuration_key, configuration_language_id, configuration_description, last_modified, date_added) 
          VALUES 
-            ('CSV : Enclosure Zeichen', 'DBIO_CSV_ENCLOSURE', '43', 'Geben Sie das Zeichen ein, das verwendet wird, um Felder innerhalb einer DbIo CSV-Datei zu <em>umschlie�en</em>.  (Voreinstellung: <b>\"</b>)', now(), now())"
+            ('CSV : Enclosure Zeichen', 'DBIO_CSV_ENCLOSURE', '43', 'Geben Sie das Zeichen ein, das verwendet wird, um Felder innerhalb einer DbIo CSV-Datei zu <em>umschließen</em>.  (Voreinstellung: <b>\"</b>)', now(), now())"
     );
     
     $db->Execute (
         "REPLACE INTO " . TABLE_CONFIGURATION_LANGUAGE . " 
             (configuration_title, configuration_key, configuration_language_id, configuration_description, last_modified, date_added) 
          VALUES 
-            ('CSV : Escape Zeichen', 'DBIO_CSV_ESCAPE', '43', '', now(), now())"
+            ('CSV : Escape Zeichen', 'DBIO_CSV_ESCAPE', '43', 'Geben Sie das Zeichen ein, das als <em>Escape Zeichen</em> innerhalb einer DbIo CSV-Datei verwendet werden soll.  (Voreinstllung: <b>backslash</b>)', now(), now())"
+    );
+    
+    $db->Execute (
+        "REPLACE INTO " . TABLE_CONFIGURATION_LANGUAGE . " 
+            (configuration_title, configuration_key, configuration_language_id, configuration_description, last_modified, date_added) 
+         VALUES 
+            ('CSV : Kodierung', 'DBIO_CHARSET', '43', 'Wählen Sie die Kodierung für DbIo CSV Dateien.  Wenn Sie Microsoft&reg; Excel verwenden, wählen Sie <b>latin1</b><br/><b>Dringend empfohlen:<br/>Verwenden Sie Open Office und NICHT Excel für Ihre csv Dateien und lassen Sie die Voreinstellung auf utf-8!</b><br/><b/>  (Voreinstellung: <b>utf8</b>)', now(), now())"
+    );
+    
+    $db->Execute (
+        "REPLACE INTO " . TABLE_CONFIGURATION_LANGUAGE . " 
+            (configuration_title, configuration_key, configuration_language_id, configuration_description, last_modified, date_added) 
+         VALUES 
+            ('CSV : Import Datumsformat', 'DBIO_IMPORT_DATE_FORMAT', '43', 'Wählen Sie das Format für <em>date</em> und <em>datetime</em> Felder in irgendeiner DbIo CSV Datei.  (Voreinstellung: <b>m-d-y</b>', now(), now())"
+    );
+    
+    $db->Execute (
+        "REPLACE INTO " . TABLE_CONFIGURATION_LANGUAGE . " 
+            (configuration_title, configuration_key, configuration_language_id, configuration_description, last_modified, date_added) 
+         VALUES 
+            ('Maximale Ausführungszeit (Sekunden)', 'DBIO_MAX_EXECUTION_TIME', '43', 'Geben Sie die maximale Ausführungszeit für eine DbIo Operation, in Sekunden ein (Voreinstellung: 60).', now(), now())"
+    );
+    
+    $db->Execute (
+        "REPLACE INTO " . TABLE_CONFIGURATION_LANGUAGE . " 
+            (configuration_title, configuration_key, configuration_language_id, configuration_description, last_modified, date_added) 
+         VALUES 
+            ('Datei splitten: Zahl der Einträge', 'DBIO_SPLIT_RECORD_COUNT', '43', 'Manchmal kann das Aufteilen einer .csv-Datei in mehrere, kleinere Dateien helfen, wenn Ihr Server bei einer <em>Import</em>-Operation ein Timeout hat oder wenn eine exportierte .csv-Datei zu groß ist, um sie in einem einzigen Chunk herunterzuladen.  Geben Sie die Anzahl der Datensätze (Standard: 2000) ein, in die diese Dateien mit <em>Database I/O Manager</em> aufgeteilt werden sollen.', now(), now())"
+    );
+    
+    $db->Execute (
+        "REPLACE INTO " . TABLE_CONFIGURATION_LANGUAGE . " 
+            (configuration_title, configuration_key, configuration_language_id, configuration_description, last_modified, date_added) 
+         VALUES 
+            ('Sortierreihenfolge für Dateien', 'DBIO_FILE_SORT_DEFAULT', '43', 'Wählen Sie die Standard-Sortierreihenfolge, die der <em>Database I/O Manager</em> verwendet, wenn er die gefundenen I/O-Dateien anzeigt:<br /><br /><b>1a</b>: Dateiname, aufsteigend<br /><b>1d</b>: Dateiname, absteigend <br /><b>2a</b>: Dateigröße, absteigend <br /><b>2a</b>: Dateigröße, aufsteigend<br /><b>2d</b>: Dateigröße, absteigend<br/> <b>3d</b>: Dateidatum, absteigend (Voreinstellung)', now(), now())"
+    );
+    
+    $db->Execute (
+        "REPLACE INTO " . TABLE_CONFIGURATION_LANGUAGE . " 
+            (configuration_title, configuration_key, configuration_language_id, configuration_description, last_modified, date_added) 
+         VALUES 
+            ('Debugging aktivieren?', 'DBIO_DEBUG', '43', 'Geben Sie an, ob (true) oder nicht (false, der Standard) das DbIo-Debugging aktiviert werden soll.  Wenn aktiviert, werden <b>alle</b> DBIO Operationen in einem Logfile <em>dbio-*.log</em> im Ordner /DEINADMIN/dbio/logs Ihres Shops protokolliert.', now(), now())"
+    );
+    
+    $db->Execute (
+        "REPLACE INTO " . TABLE_CONFIGURATION_LANGUAGE . " 
+            (configuration_title, configuration_key, configuration_language_id, configuration_description, last_modified, date_added) 
+         VALUES 
+            ('Debugging Logs Datumsformat', 'DBIO_DEBUG_DATE_FORMAT', '43', 'Geben Sie die Formatierungszeichenfolge ein, die für Zeitstempel in den DbIo-Protokolleinträgen verwendet werden soll.', now(), now())"
     );
     
     
@@ -102,6 +151,12 @@ if (DBIO_CURRENT_VERSION != $dbio_current_version) {
     //
     if (version_compare($dbio_current_version, '1.1.0', '<')) {
         $db->Execute ("INSERT IGNORE INTO " . TABLE_CONFIGURATION . " ( configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added, use_function, set_function ) VALUES ( '<em>Products</em> Import:  Allow Duplicate Models?', 'DBIO_PRODUCTS_ALLOW_DUPLICATE_MODELS', 'No', 'When performing a <em>Products</em> import, should an imported record be allowed if it would create a product with a duplicated model number?  (Default: <b>No</b>)', $cgi, 100, now(), NULL, 'zen_cfg_select_option(array(\'Yes\', \'No\'),')");
+        $db->Execute (
+        "REPLACE INTO " . TABLE_CONFIGURATION_LANGUAGE . " 
+            (configuration_title, configuration_key, configuration_language_id, configuration_description, last_modified, date_added) 
+         VALUES 
+            ('<em>Artikel</em> Import:  Doppelte Artikelnummern erlauben?', 'DBIO_PRODUCTS_ALLOW_DUPLICATE_MODELS', '43', 'Soll bei der Durchführung eines <em>Artikel</em>Imports ein importierter Datensatz erlaubt sein, wenn dadurch ein Produkt mit einer doppelten Artikelnummer erstellt würde?  (Voreinstellung: <b>Nein</b>)', now(), now())"
+    );
     }
 
     if (version_compare($dbio_current_version, '1.2.0', '<')) {
@@ -184,6 +239,13 @@ if (DBIO_CURRENT_VERSION != $dbio_current_version) {
                 VALUES 
                     ( '<em>Products</em>: Auto-Create Categories on Import?', 'DBIO_PRODUCTS_AUTO_CREATE_CATEGORIES', 'No', 'How should the <em>DbIo</em> handle missing categories on a <em>Products</em> import?  Choose <b>Yes</b> to have any missing categories automatially generated; choose <b>No</b> (the default) to disallow any product imports when the categories don\'t previously exist.', $cgi, 150, now(), NULL, 'zen_cfg_select_option(array(\'Yes\', \'No\'),')"
             );
+            
+            $db->Execute (
+        "REPLACE INTO " . TABLE_CONFIGURATION_LANGUAGE . " 
+            (configuration_title, configuration_key, configuration_language_id, configuration_description, last_modified, date_added) 
+         VALUES 
+            ('<em>Artikel</em>: fehlende Kategorien beim Import automatisch erzeugen?', 'DBIO_PRODUCTS_AUTO_CREATE_CATEGORIES', '43', 'Wie soll <em>DbIo</em> fehlende Kategorien bei einem <em>Artikel</em> Import behandeln?  Wählen Sie <b>Ja</b>, um fehlende Kategorien automatisch generieren zu lassen; wählen Sie <b>Nein</b> (die Voreinstellung), um den Import von Artikeln zu unterbinden, wenn die Kategorien vorher nicht existierten.', now(), now())"
+         );
         }
     }
     
@@ -195,6 +257,13 @@ if (DBIO_CURRENT_VERSION != $dbio_current_version) {
                 VALUES 
                     ( '<em>Products</em>: Product Creation Requires Command?', 'DBIO_PRODUCTS_INSERT_REQUIRES_COMMAND', 'No', 'Does a <em>Products</em> import require a DbIo <code>ADD</code> command? Choose <b>No</b> (the default) to allow products to be created if no matching products_id and/or products_model is found.<br><br>Choose <b>Yes</b> to disallow any product-import that results in a new product unless the <code>ADD</code> command is present.', $cgi, 110, now(), NULL, 'zen_cfg_select_option(array(\'Yes\', \'No\'),')"
             );
+            
+            $db->Execute (
+        "REPLACE INTO " . TABLE_CONFIGURATION_LANGUAGE . " 
+            (configuration_title, configuration_key, configuration_language_id, configuration_description, last_modified, date_added) 
+         VALUES 
+            ('<em>Artikel</em>: Soll das Anlegen fehlender Artikel ein spezielles Kommando erfordern?', 'DBIO_PRODUCTS_INSERT_REQUIRES_COMMAND', '43', 'Benötigt ein <em>Artikel</em> Import einen DbIo <code>ADD</code> Befehl? Wählen Sie <b>Nein</b> (Standardeinstellung), um die Erstellung von Produkten zuzulassen, wenn keine passende products_id und/oder kein passendes products_model gefunden wird.<br><br>Wählen Sie <b>Ja</b>, um jeglichen Artikel-Import zu verbieten, der zu einem neuen Produkt führt, es sei denn, der Befehl <code>ADD</code> ist vorhanden.', now(), now())"
+         );
         }
     }
 
